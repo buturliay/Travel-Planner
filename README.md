@@ -1,46 +1,37 @@
 # Travel Planner
 
-A private travel notebook built with Next.js, TypeScript, Tailwind CSS, and Supabase. Sign in to create trips, build a day-by-day itinerary, and track expenses. Each account only sees its own data.
+A private notebook for a trip. Sign in, create a trip, plan each day, and keep a running total of what you spend. Your account only shows your own trips.
 
-## Local setup
+## Sign in
 
-1. Install dependencies and copy the env file:
+Open the app and choose **Create account** or **Sign in**. Use your email and a password. After you sign in, you land on your list of trips.
 
-```bash
-npm install
-cp .env.example .env.local
-```
+If you created an account and a confirmation email arrives, open that message before signing in.
 
-2. Create a project at [supabase.com](https://supabase.com). In **Project Settings → API**, copy the project URL and the anon public key into `.env.local`:
+## Create a trip
 
-```bash
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-```
+On the trips page, fill in **New trip**:
 
-3. In the Supabase **SQL Editor**, run [`supabase/schema.sql`](supabase/schema.sql). That creates `trips`, `itinerary_items`, and `expenses`, with row-level security so a person can only read and change their own trips.
+- **Trip name** and **destination**
+- **Start** and **end** dates, up to 90 days
+- Optional **notes** for anything you want to remember
 
-4. In **Authentication → URL Configuration**, set:
+Choose **Create trip**. The dates become the days in the itinerary. Open a trip from the list to plan it.
 
-- Site URL: `http://localhost:3000`
-- Redirect URLs: `http://localhost:3000/auth/callback`
+## Plan the days
 
-5. Start the app:
+Each day has its own section. Add a stop with a time, a name, a place, and optional notes. Time can be left blank.
 
-```bash
-npm run dev
-```
+Move a stop up or down to change the order of the day. Edit a stop to change its details, including which day it belongs to. Delete a stop when you no longer need it.
 
-Open [http://localhost:3000](http://localhost:3000), create an account, and add a trip. If email confirmation is enabled in Supabase, confirm the message first, then sign in.
+## Track spending
 
-## Deploy on Vercel
+In **Spending**, add an expense with a date, a category, a description, an amount, and a currency. Categories are Lodging, Food, Transport, Activities, Shopping, and Other. Currencies include USD, EUR, GBP, CAD, AUD, JPY, and MXN.
 
-1. Push this repo to GitHub.
-2. Import the project in [Vercel](https://vercel.com) (or run `npx vercel --prod`).
-3. Add the same two environment variables in the Vercel project settings.
-4. After the first deploy, add the production URL to Supabase Authentication:
+The total at the top updates as you add expenses. Each currency is totaled on its own. Edit or delete an expense from its row.
 
-- Site URL: `https://your-app.vercel.app`
-- Redirect URLs: `https://your-app.vercel.app/auth/callback`
+## Change or remove a trip
 
-Redeploy if you change environment variables.
+On a trip page, **Edit trip** updates the name, destination, dates, and notes. Changing the dates updates which days appear in the itinerary. **Delete trip** removes that trip and its days and expenses.
+
+**All trips** returns to the list. Sign out from the header when you are done.
